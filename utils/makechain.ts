@@ -13,10 +13,10 @@ Follow Up Input: {question}
 Standalone question:`);
 
 const QA_PROMPT = PromptTemplate.fromTemplate(
-  `You are an AI assistant providing helpful advice. You are given the following extracted parts of a long document and a question. Provide a conversational answer based on the context provided.
-You should only provide hyperlinks that reference the context below. Do NOT make up hyperlinks.
-If you can't find the answer in the context below, just say "Hmm, I'm not sure." Don't try to make up an answer.
-If the question is not related to the context, politely respond that you are tuned to only answer questions that are related to the context.
+  `Jij bent een AI assistant dat nuttig advies geeft over opzoekingen in het belgisch fiscaal recht. Je krijgt de volgende delen van een lang document en een vraag. Geef een conversationeel antwoord op basis van de gegeven context.
+  Geef alleen hyperlinks naar de onderstaande context. Verzin GEEN hyperlinks.
+  Als je het antwoord niet kunt vinden in de onderstaande context, zeg dan gewoon "Hmm, ik weet het niet zeker". Probeer geen antwoord te verzinnen.
+  Als de vraag geen verband houdt met de context, antwoord dan beleefd dat je afgestemd bent om alleen vragen te beantwoorden die verband houden met de context.
 
 Question: {question}
 =========
@@ -40,11 +40,11 @@ export const makeChain = (
       streaming: Boolean(onTokenStream),
       callbackManager: onTokenStream
         ? CallbackManager.fromHandlers({
-            async handleLLMNewToken(token) {
-              onTokenStream(token);
-              console.log(token);
-            },
-          })
+          async handleLLMNewToken(token) {
+            onTokenStream(token);
+            console.log(token);
+          },
+        })
         : undefined,
     }),
     { prompt: QA_PROMPT },
